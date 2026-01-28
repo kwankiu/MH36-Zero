@@ -2,6 +2,9 @@
 
 **Modular toolhead board for Waveshare RP2040-Zero and compatible modules**
 
+![Cover Image](hardware/MH36_Zero_V1/images/PCB-V1.0-3D.png) 
+Also on [OSHWLab](https://oshwlab.com/kwankiu/rp2040-zero-toolhead)
+
 MH36-Zero is a compact, open-source toolhead board designed for Voron, Rat Rig, and other Klipper-based 3D printers. Built around the Waveshare RP2040-Zero, it is minimalist yet feature-complete: 4 independent fan/heater channels, selectable voltage, StepStick driver socket, ADXL345 breakout, filament detection, probe support, Neopixel, and I2C expansion.
 
 The board is designed to be **cheap and easy to build** — only basic SMD passives are required, and it reuses parts you likely already have (RP2040-Zero, TMC driver, ADXL breakout, NMOS modules, etc.).
@@ -39,10 +42,10 @@ The board is designed to be **cheap and easy to build** — only basic SMD passi
 
 ### Pinout & Wiring
 
-![Pinout Diagram](docs/images/pinout.png)  
-*(Add your EasyEDA 3D view screenshot or drawn diagram here)*
-
 **TO BE ADDED**
+![Pinout Diagram](hardware/MH36_Zero_V1/images/PCB-V1.0-PIN.png)
+![Top PCB](hardware/MH36_Zero_V1/images/PCB-V1.0-TOP.png)
+![Bottom PCB](hardware/MH36_Zero_V1/images/PCB-V1.0-BOTTOM.png)
 
 ### BOM
 Mandatory:
@@ -108,7 +111,7 @@ aliases:
 ### Safety & Warnings
 
 - No overcurrent/short-circuit protection on VIN — use fused/current-limited PSU, never plug/unplug wires live.
-- No reverse polarity protection — double-check +VIN– wiring before power-up (reverse may damage USB host via GND backdoor).
+- No reverse polarity protection — double-check VIN + – wiring before power-up (reverse may damage USB host via GND back door).
 - Hand-assembly **required** — solder carefully, check for bridges.
 
 ### License
