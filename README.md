@@ -89,7 +89,7 @@ Optional:
 
 ### Klipper Configuration
 
-See `firmware/klipper_config/MH36Zero.cfg` in this repo for a template.
+See `firmware/klipper_config/MH36Zero.cfg` in this repo for pin example.
 
 ```ini
 ## Toolhead Board
@@ -107,6 +107,7 @@ restart_method: command
 # MH36 Zero
 [include MH36Zero.cfg]
 ```
+See `firmware/klipper_config/example.cfg` in this repo for detailed example.
 
 ### Safety & Warnings
 
