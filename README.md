@@ -95,18 +95,82 @@ Bottom PCB layout
 
 ## Assembly Guide
 
-1. **Bottom side (SMD)**: Solder all 0603 passives (100nF ×5, 4.7k 0.1% ×2, 2.2k x2, 100Ω, 330Ω and optional LED resistors).
-2. **Bottom side (Jumper Pads)**: Solder **all four** Voltage Select jumper pads to your desired operating voltage (Probe/3D Touch, FAN/HE1, FAN/HE2, FAN/HE3, FAN/HE4)
-3. **Top side**: Solder headers (2.54 mm), 3.81 mm terminal, 100µF 35V electrolytic (observe polarity!) and all connectors (Optional: Solder LEDs + resistors (VIN LED 10k, 5V LED 2.2k)).
-3. **Top side (Jumper Pins)**: Short the INT and DIAG enable jumpers if the feature is needed
-4. **Plug-ins**:
-   - Waveshare RP2040-Zero module
-   - TMC driver module
-   - NMOS modules
-   - ADXL module (optional)
-5. **GND enhancement for high sustained load (optional)**:
-   - Solder a **18 AWG or thicker** wire between the two GND pins on the TMC/StepStick module (or the bottom of the PCB)
-   - This is discovered during a LED resistor routing which generated a narrow ground plane path causing the ground to flow through the TMC/StepStick Module instead of the ground plane as return path (fixed in the final V1.0 PCB file, therefore **not necessary**), but may help reduces heat and allows better ground return under sustained high loads
+Follow these steps in order. Start with a clean workspace, good lighting, and appropriate soldering tools (fine-tip iron ~350–380°C for SMD, flux, solder wick for mistakes). Use leaded solder for easier SMD work if possible.
+
+1. **Solder bottom-side SMD passives**  
+   Populate and solder all 0603 components on the bottom side:  
+   - 5 × 100 nF ceramic capacitors on C1, C3, C4, C5, C6
+   - 2 × 4.7 kΩ **0.1%** resistors on R2 and R3
+   - 2 × 2.2 kΩ resistors on R1 and R4
+   - 1 × 330 Ω resistor on R5 (or 470 Ω; skip if your Neopixel chain already has series resistance)
+   - 1 × 100 Ω resistor on R6
+   - Optional: LED current-limiting resistors (10 kΩ for VIN LED on R7, 2.2 kΩ for 5V LED on R8) if installing power indicators
+
+   **Tip**: Use plenty of flux, tin one pad first, place component with tweezers, then solder the second pad. Reflow with hot air if available for cleaner results.
+
+   *(Add photo here: close-up of soldered 0603 passives on bottom side)*
+
+2. **Configure voltage-select solder jumpers (bottom side)**
+   There are **five** sets of 3-pin solder jumper pads for voltage selection:
+   - Probe / 3D Touch
+   - FAN/HE1
+   - FAN/HE2
+   - FAN/HE3
+   - FAN/HE4
+
+   Each set has three pads in a row (or sometimes in a different orientation like vertical), with the **center pad** being the common pin that needs to connect to your chosen voltage.
+
+   - **Solder a bridge** between the **center pad** and the pad labeled for your desired operating voltage (check specific jumper's orientation and refer to silkscreen labels on the PCB).
+   - Use a small amount of solder to create a clean bridge — avoid excess that could short to adjacent pads.
+
+   **Examples**:  
+   - For 24V operation (12-24V depending on your main power source) → bridge center to the "VIN" labeled pad
+   - For 5V operation → bridge center to the "5V" labeled pad
+
+   **Caution**: Double-check your target voltage — wrong setting can damage fans, heaters, or probes!
+
+   *(Add photo or diagram here: zoomed-in view of solder jumper pads before/after bridging)*
+
+3. **Solder top-side through-hole and larger components**
+   - 2.54 mm male and female headers
+   - 3.81 mm 2-pin screw terminal (KF128 style or equivalent)
+   - 100 µF 35 V capacitor on C2 — **observe polarity!** (negative stripe toward GND)
+   - All XH 2-pin (or KF128 style) and 4-pin connectors
+   - Optional: 0603 Power indicator LEDs (make sure R7 and R8 resistors are soldered at the bottom)
+
+4. **Configure optional feature jumpers (top side)**  
+   - Short the INT and/or DIAG jumper pads with 2.54 mm jumper shunts **only if** you need those features enabled.  
+   - Leave open otherwise to avoid unnecessary pull-ups or conflicts.
+
+5. **Install plug-in modules**  
+   Insert and solder (if castellated/through-hole) or just plug (if socketed):  
+   - RP2040-Zero module
+     - Align the pins precisely — check orientation!
+   - Stepper driver module (TMC2209, etc)
+     - Align the pins precisely — check orientation!
+   - NMOS modules for fan/heater
+     - For 3-pin NMOS modules (e.g., HYG038N03 or similar): Pay close attention to orientation and pin order
+     - For 6-pin modules (e.g., Mellow FLY Fan MOS or equivalents): These are often symmetric and can be installed in **either orientation** — confirm with your specific module's pinout if it has any asymmetry.
+   - **Optional: Accelerometer module** (GY-291 ADXL345 or any pin-compatible breakout)  
+     Plug into the dedicated 8-pin header.  
+     **Important compatibility check**: When viewing the board from the top side (components facing you), the **rightmost pin** of the 8-pin header (the first pin from the right) must connect to **GND** on your accelerometer module.  
+     - If your module has **GND** as its rightmost pin → compatible and safe to plug in.  
+     - If your module has **VCC** or **3.3V** as the rightmost pin → **incompatible** — do **not** insert it, as this will short power directly to ground and likely damage the module or board.  
+
+   *(Add photo here: fully populated board with modules installed)*
+
+6. **Optional: GND enhancement for high-current / sustained loads**  
+   For applications with **very high sustained current draw** (especially through the stepper driver, FAN/HE1, and FAN/HE2 outputs), you can further improve the ground return path and potentially reduce localized heating:
+
+   - Solder a thick wire (**≥18 AWG**, ideally 16–14 AWG if space allows) between one of the following pairs:
+     - The two GND pins on the TMC/StepStick module socket (top side), **or**
+     - The corresponding GND pads on the **bottom** of the PCB (even better).
+
+   This creates a low-resistance bridge across the ground plane, helping distribute return current more evenly between the left and right sections of the board.
+
+   **Note**: This enhancement was originally added as a precaution for a routing limitation in early/pre-V1.0 board revisions, where a narrow ground path between the left and right ground planes could theoretically force most current through the TMC module itself (acting as a lower-resistance path). The final **V1.0 PCB layout** fully resolves this routing limitation with improved ground plane connectivity, so this modification is **not required** for production boards. However, it remains a useful low-risk mod for extreme use cases or if you notice driver/module warmth during testing.
+
+   *(Suggested: Add close-up photo here – showing the thick GND wire soldered between TMC GND pins or bottom pads, before/after comparison if possible)*
 
 ## Klipper Configuration
 
