@@ -2,14 +2,14 @@
 
 **Modular toolhead board for Waveshare RP2040-Zero and compatible modules**
 
-![Cover Image](hardware/MH36_Zero_V1/images/PCB-V1.0-3D.png) 
+![Cover Image](hardware/MH36_Zero_V1/images/PCB-V1.0-3D.png)
 Also on [OSHWLab](https://oshwlab.com/kwankiu/rp2040-zero-toolhead)
 
 MH36-Zero is a compact, open-source toolhead board designed for Voron, Rat Rig, and other Klipper-based 3D printers. Built around the Waveshare RP2040-Zero, it is minimalist yet feature-complete: 4 independent fan/heater channels, selectable voltage, StepStick driver socket, ADXL345 breakout, filament detection, probe support, Neopixel, and I2C expansion.
 
 The board is designed to be **cheap and easy to build** — only basic SMD passives are required, and it reuses parts you likely already have (RP2040-Zero, TMC driver, ADXL breakout, NMOS modules, etc.).
 
-### Key Features / Compatibility
+## Key Features / Compatibility
 
 - Modular and reusable parts (drawer-friendly)
 - Waveshare RP2040-Zero socket
@@ -40,39 +40,60 @@ The board is designed to be **cheap and easy to build** — only basic SMD passi
 - Board size: 50.8 × 45.8 mm
 - Firmware: Klipper (tested with RP2040-Zero USB connection)
 
-### Pinout & Wiring
+## Pinout & Wiring
 
 **TO BE ADDED**
 ![Pinout Diagram](hardware/MH36_Zero_V1/images/PCB-V1.0-PIN.png)
+
+## PCB
+The V1.0 PCB is designed using EasyEDA and is available on OSHWLab, you may also use the exported gerber file in this repo
+
+For JLCPCB, upload the gerber file, and leave the PCB specifications as default
+- Cost (5 pcs): $7 (sometimes $2 with offer/coupon)
+
+However, you may want to ensure the following specifications:
+- 4-layer PCB
+- 1.6mm PCB thickness
+- 1oz copper (0.5oz inner)
+- Plugged (Via Covering)
+
+Notes: make sure to choose `Order Number(Specify Position)` for JLCPCB, or remove the `JLCJLCJLCJLC` silk label from the PCB File before ordering
+
 ![Top PCB](hardware/MH36_Zero_V1/images/PCB-V1.0-TOP.png)
+Top PCB layout
 ![Bottom PCB](hardware/MH36_Zero_V1/images/PCB-V1.0-BOTTOM.png)
+Bottom PCB layout
 
-### BOM
-Mandatory:
-- 5× 100nF 0603 ceramic capacitor
-- 1× 100µF 35V electrolytic capacitor (through-hole, 6.3 or 8mm diameter)
-- 2× 2.2kΩ 0603 resistor
-- 2× 4.7kΩ **0.1%** 0603 resistor (0.1% tolerance is **strongly recommended** for temperature accuracy)
-- 1× 100Ω 0603 resistor
-- 1× 330Ω 0603 resistor (or 470Ω, can be ommited if your neopixel already have a 470Ω resistor)
-- 1x 3.81 mm 2-pin screw terminal (such as KF128-3.81-2P)
-- 1x Waveshare RP2040-Zero (or compatible module)
-- 1x StepStick driver module (TMC2209, GC6609, A4988, etc)
-- 1x NMOS modules (4× HYG038N03 module or 2x Mellow FLY Fan MOS or similar)
-- 2.54 mm **male** headers (various counts)
-- 2.54 mm **female** headers (RP2040-Zero, StepStick, NMOS 6-pin and ADXL 8-pin)
-- 7x 2.54 mm XH 2-pin connectors (you can swap 1-3 of them with KF128-2.54-2P for FAN/HEATER headers)
-- 1x 2.54 mm XH 4-pin connectors
+## BOM
+### Mandatory Components
+| Qty | Component                                      | Package / Type              | Notes                                                                                   |
+|-----|------------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------|
+| 5   | 100 nF ceramic capacitor                       | 0603                        |                                                                                         |
+| 1   | 100 µF (35V) capacitor                         | Through-hole                | 35V or higher, electrolytic or solid, 6.3 mm or 8 mm diameter                           |
+| 2   | 2.2 kΩ resistor                                | 0603                        |                                                                                         |
+| 2   | 4.7 kΩ (±0.1%) resistor                        | 0603                        | **0.1% tolerance strongly recommended** for accurate temperature readings               |
+| 1   | 100 Ω resistor                                 | 0603                        | UART                                                                                    |
+| 1   | 330 Ω resistor                                 | 0603                        | or 470 Ω; can be omitted if your Neopixel already includes a 470 Ω series resistor      |
+| 1   | 3.81 mm 2-pin screw terminal                   | KF128-3.81-2P or equivalent | For 12-24V Power Input                                                                  |
+| 1   | Waveshare RP2040-Zero                          | —                           | or compatible module                                                                    |
+| 1   | StepStick driver module                        | —                           | TMC2209, GC6609, A4988, etc.                                                            |
+| 1   | NMOS fan/heater driver module                  | —                           | 4× HYG038N03 module **or** 2× Mellow FLY Fan MOS or similar                             |
+| —   | 2.54 mm male headers                           | 2.54 mm                     | Various pin counts as needed                                                            |
+| —   | 2.54 mm female headers                         | 2.54 mm                     | For RP2040-Zero, StepStick, NMOS 6-pin, ADXL 8-pin                                      |
+| 7   | 2.54 mm XH 2-pin connectors                    | XH 2.54 mm                  | Can swap 1–3 with KF128-2.54-2P for FAN/HEATER headers                                  |
+| 1   | 2.54 mm XH 4-pin connector                     | XH 2.54 mm                  | Stepper motor connector                                                                 |
 
-Optional:
-- 2× 0603 LED (VIN & 5V indicators)
-- 1× 10kΩ 0603 resistor (VIN LED)
-- 1× 2.2kΩ 0603 resistor (5V LED)
-- 1x ADXL345 GY-291 Module (for input shaper, bed leveling, probing and X/Y homing)
-- 1x NTC 100K through-hole for chamber temp
-- 2x 2.54mm Jumpers (for INT and DIAG enable)
+### Optional Components
+| Qty | Component                                      | Package / Type              | Notes                                                                            |
+|-----|------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------|
+| 2   | 0603 LED                                       | 0603                        | VIN & 5V power indicators                                                        |
+| 1   | 10 kΩ resistor                                 | 0603                        | Current-limiting resistor for VIN LED, use 22 kΩ or higher if too bright         |
+| 1   | 2.2 kΩ resistor                                | 0603                        | Current-limiting resistor for 5V LED                                             |
+| 1   | ADXL345 module                                 | GY-291 or pin-match         | For input shaping, bed leveling, probing, X/Y homing                             |
+| 1   | NTC 100K thermistor                            | Through-hole                | Chamber temperature monitoring                                                   |
+| 2   | 2.54 mm jumper / shunt                         | 2.54 mm                     | For enabling INT and DIAG pins (if/when needed)                                  |
 
-### Assembly Guide
+## Assembly Guide
 
 1. **Bottom side (SMD)**: Solder all 0603 passives (100nF ×5, 4.7k 0.1% ×2, 2.2k x2, 100Ω, 330Ω and optional LED resistors).
 2. **Bottom side (Jumper Pads)**: Solder **all four** Voltage Select jumper pads to your desired operating voltage (Probe/3D Touch, FAN/HE1, FAN/HE2, FAN/HE3, FAN/HE4)
@@ -87,7 +108,7 @@ Optional:
    - Solder a **18 AWG or thicker** wire between the two GND pins on the TMC/StepStick module (or the bottom of the PCB)
    - This is discovered during a LED resistor routing which generated a narrow ground plane path causing the ground to flow through the TMC/StepStick Module instead of the ground plane as return path (fixed in the final V1.0 PCB file, therefore **not necessary**), but may help reduces heat and allows better ground return under sustained high loads
 
-### Klipper Configuration
+## Klipper Configuration
 
 See `firmware/klipper_config/MH36Zero.cfg` in this repo for pin example.
 
@@ -109,15 +130,15 @@ restart_method: command
 ```
 See `firmware/klipper_config/example.cfg` in this repo for detailed example.
 
-### Safety & Warnings
+## Safety & Warnings
 
 - No overcurrent/short-circuit protection on VIN — use fused/current-limited PSU, never plug/unplug wires live.
 - No reverse polarity protection — double-check VIN + – wiring before power-up (reverse may damage USB host via GND back door).
 - Hand-assembly **required** — solder carefully, check for bridges.
 
-### License
+## License
 - GPL GNU v3 License — feel free to fork, modify, and share.
 
-### Credits
+## Credits
 - Designed by kwankiu (Samuel)
 - Inspired by EBB36, SHT36, NH36, THR36, and other open-source toolheads
