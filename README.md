@@ -89,23 +89,23 @@ Optional:
 
 ### Klipper Configuration
 
-See `firmware/klipper_config/mcu_mh36_zero.cfg` in this repo for a template.
+See `firmware/klipper_config/MH36Zero.cfg` in this repo for a template.
 
 ```ini
-[mcu mh36_zero]
-serial: /dev/serial/by-id/usb-Klipper_rp2040_...
+## Toolhead Board
+##--------------------------------------------------------------------
+[mcu thb]
+## For USB
+##	Obtain definition by "ls /dev/serial/by-id/*" then unplug to verify
+serial: /dev/serial/by-id/{REPLACE WITH YOUR SERIAL}
+restart_method: command
 
-[board_pins mh36_zero]
-aliases:
-    heater1_pin = gpio5, fan1_pin = gpio6,
-    heater2_pin = gpio7, fan2_pin = gpio8,
-    heater3_pin = gpio9, fan3_pin = gpio10,
-    heater4_pin = gpio11, fan4_pin = gpio12,
-    thermistor0_pin = gpio27,
-    thermistor1_pin = gpio28,
-    neopixel_pin = gpio26,
-    adxl345_cs_pin = gpio15,
-    # ... (add more as needed)
+#######
+# MCU #
+#######
+
+# MH36 Zero
+[include MH36Zero.cfg]
 ```
 
 ### Safety & Warnings
