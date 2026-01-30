@@ -51,7 +51,7 @@ The board is designed to be **cheap and easy to build** — only basic SMD passi
 ![Pinout Diagram](hardware/MH36_Zero_V1/images/PCB-V1.0-PIN.png)
 
 ## PCB
-The V1.0 PCB is designed using EasyEDA and is available on OSHWLab, you may also use the exported gerber file in this repo
+The V1.0 PCB is a **4-layer PCB** designed using EasyEDA and is available on OSHWLab, you may also use the exported gerber file in this repo
 
 For JLCPCB, upload the gerber file, and leave the PCB specifications as default
 - Cost (5 pcs): $7 (sometimes $2 with offer/coupon)
@@ -64,10 +64,8 @@ However, you may want to ensure the following specifications:
 
 Notes: make sure to choose `Order Number(Specify Position)` for JLCPCB, or remove the `JLCJLCJLCJLC` silk label from the PCB File before ordering
 
-![Top PCB](hardware/MH36_Zero_V1/images/PCB-V1.0-TOP.png)
-Top PCB layout
-![Bottom PCB](hardware/MH36_Zero_V1/images/PCB-V1.0-BOTTOM.png)
-Bottom PCB layout
+PCB V1.0 layout:
+![PCB layout](hardware/MH36_Zero_V1/images/PCB-V1.0-BOTH.png)
 
 ## BOM
 ### Mandatory Components
