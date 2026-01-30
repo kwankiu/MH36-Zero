@@ -16,8 +16,11 @@ The board is designed to be **cheap and easy to build** — only basic SMD passi
   - Supports RP2040-Zero/Tiny, RP2350-Zero, and pin-compatible modules
   - Cloned RP2040-Zero cost less than $2 (Not tested for reliability, Waveshare board is **recommended**)
 - StepStick driver module socket
-  - Support TMC2209 (recommended), TMC2208, TMC2240, GC6609, A4988, etc
-  - UART and DIAG supported
+  - Supported Drivers:
+    - **UART Mode:** TMC2209 (recommended), TMC2208, TMC2225, TMC2226, TMC2240, GC6609
+    - **Static Mode**:* A4988, DRV8825, LV8729
+    - **SPI Mode:** Not Supported
+  - DIAG Jumper for StallGuard on supported TMC drivers
 - 4× independent FAN/HE channels with NMOS headers (GND-GATE-OUT)
   - MOS_VSEL jumper: 5V or VIN selectable
   - Removable NMOS modules (6-pin header)
@@ -39,6 +42,8 @@ The board is designed to be **cheap and easy to build** — only basic SMD passi
   - Mount: Mini Stealthburner, Anthead, A4T, DragonBurner, G2 and similar toolheads
 - Board size: 50.8 × 45.8 mm
 - Firmware: Klipper (tested with RP2040-Zero USB connection)
+
+***A4988** requires a small hardware modification to reach **1/16**: you must **short MS1 & MS2 pins to MS3** on the driver/header. **DRV8825** and **LV8729** (and **A4988** after the mod) can switch between **Full Step** (UART pin LOW) and **1/16** (UART pin HIGH) via firmware.
 
 ## Pinout & Wiring
 
