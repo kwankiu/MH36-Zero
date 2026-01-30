@@ -2,6 +2,8 @@
 
 **Modular toolhead board for Waveshare RP2040-Zero and compatible modules**
 
+**Project Status**: Sent for production, NOT yet tested, DO NOT order a PCB yourself
+
 ![Cover Image](hardware/MH36_Zero_V1/images/PCB-V1.0-3D.png)
 Also on [OSHWLab](https://oshwlab.com/kwankiu/rp2040-zero-toolhead)
 
