@@ -21,7 +21,7 @@ The board is designed to be **cheap and easy to build** — only basic SMD passi
   - Supported Drivers:
     - **UART Mode:** TMC2209 (recommended), TMC2208, TMC2225, TMC2226, TMC2240, GC6609
     - **Static Mode**:* A4988, DRV8825, LV8729
-    - **SPI Mode:** Not Supported
+    - **SPI Mode:** **Not Supported**
   - DIAG Jumper for StallGuard on supported TMC drivers
 - 4× independent FAN/HE channels with NMOS headers (GND-GATE-OUT)
   - MOS_VSEL jumper: 5V or VIN selectable
@@ -67,7 +67,7 @@ However, you may want to ensure the following specifications:
 Notes: make sure to choose `Order Number(Specify Position)` for JLCPCB, or remove the `JLCJLCJLCJLC` silk label from the PCB File before ordering
 
 PCB V1.0 layout:
-![PCB layout](hardware/MH36_Zero_V1/images/PCB-V1.0-BOTH.png)
+![PCB layout](docs/images/PCB-V1.0-BOTH.png)
 
 ## BOM
 ### Mandatory Components
@@ -106,9 +106,9 @@ Follow these steps in order. Start with a clean workspace, good lighting, and ap
    Populate and solder all 0603 components on the bottom side:  
    - 5 × 100 nF ceramic capacitors on C1, C3, C4, C5, C6
    - 2 × 4.7 kΩ **0.1%** resistors on R2 and R3
-   - 2 × 2.2 kΩ resistors on R1 and R4
+   - 2 × 2.2 kΩ resistors on R4 and R6
    - 1 × 330 Ω resistor on R5 (or 470 Ω; skip if your Neopixel chain already has series resistance)
-   - 1 × 100 Ω resistor on R6
+   - 1 × 100 Ω resistor on R1
    - Optional: LED current-limiting resistors (10 kΩ for VIN LED on R7, 2.2 kΩ for 5V LED on R8) if installing power indicators
 
    **Tip**: Use plenty of flux, tin one pad first, place component with tweezers, then solder the second pad. Reflow with hot air if available for cleaner results.
